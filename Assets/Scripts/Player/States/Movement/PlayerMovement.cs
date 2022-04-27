@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     [SerializeField][Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
 
+    [SerializeField] float slopeForce = 3f;
+    [SerializeField] float slopeRayLength = 1.5f;
+
+
+
     private bool isJumping;
     [SerializeField] private AnimationCurve jumpFallOff;
     [SerializeField] private float jumpMultiplier;
@@ -73,7 +78,31 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        // If moving and on slope, apply extra gravity
+        if(targetDir != Vector2.zero && OnSlope()) 
+        {
+            controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
+        }
+
         JumpInput();
+    }
+
+    private bool OnSlope() 
+    {
+        if(isJumping)
+        {
+            return false;
+        }
+
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, controller.height / 2 * slopeRayLength))
+        {
+            if(hit.normal != Vector3.up)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void JumpInput()
