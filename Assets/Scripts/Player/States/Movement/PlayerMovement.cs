@@ -13,6 +13,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     [SerializeField][Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
 
+    private bool isJumping;
+    [SerializeField] private AnimationCurve jumpFallOff;
+    [SerializeField] private float jumpMultiplier;
+    [SerializeField] private KeyCode jumpKey;
+
+
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     public CharacterController controller = null;
@@ -34,11 +40,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        // UpdateMouseLook();
-        // UpdateMovement();
-    }
+    void Update() {}
+
     public void UpdateMouseLook()
     {
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
@@ -69,5 +72,33 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocity = (Vector3.ClampMagnitude(transform.forward * currentDir.y + transform.right * currentDir.x, 1.0f)) * walkSpeed + Vector3.up * velocityY;
 
         controller.Move(velocity * Time.deltaTime);
+
+        JumpInput();
     }
+
+    void JumpInput()
+    {
+        if(Input.GetKeyDown(jumpKey) && !isJumping)
+        {
+            isJumping = true;
+            StartCoroutine(JumpEvent());
+        }
+    }
+
+    IEnumerator JumpEvent()
+    {
+        controller.slopeLimit = 90f;
+        float timeInAir = 0f;
+        do
+        {
+            float jumpForce = jumpFallOff.Evaluate(timeInAir);
+            controller.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+            timeInAir += Time.deltaTime;
+            yield return null;
+        } while (!controller.isGrounded && controller.collisionFlags != CollisionFlags.Above);
+        controller.slopeLimit = 45f;
+        isJumping = false;
+
+    }
+
 }
