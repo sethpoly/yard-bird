@@ -5,34 +5,37 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Mouse Settings")]
+    [SerializeField] private float mouseSensitivity = 3.5f;
+    [SerializeField] private bool lockCursor = true;
+    [SerializeField][Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.03f;
     [SerializeField] Transform playerCamera = null;
-    [SerializeField] float mouseSensitivity = 3.5f;
-    [SerializeField] bool lockCursor = true;
-    [SerializeField] float walkSpeed = 6f;
-    [SerializeField] float gravity = -13.0f;
-    [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
-    [SerializeField][Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
 
-    [SerializeField] float slopeForce = 3f;
-    [SerializeField] float slopeRayLength = 1.5f;
+    [Header("Movement Settings")]
+    [SerializeField] private float runSpeed = 10f;
+    [SerializeField] private float walkSpeed = 6f;
+    [SerializeField] private float runBuildUpSpeed = 5f;
+    [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.3f;
+    [SerializeField] private float slopeForce = 3f;
+    [SerializeField] private float slopeRayLength = 1.5f;
 
-
-
-    private bool isJumping;
+    [Header("Jump Settings")]
+    [SerializeField] private float gravity = -13.0f;
     [SerializeField] private AnimationCurve jumpFallOff;
     [SerializeField] private float jumpMultiplier;
     [SerializeField] private KeyCode jumpKey;
+    [SerializeField] private KeyCode runKey;
 
-
-    float cameraPitch = 0.0f;
-    float velocityY = 0.0f;
+    private bool isJumping;
+    private float movementSpeed = 6f;
+    private float cameraPitch = 0.0f;
+    private float velocityY = 0.0f;
+    private Vector2 currentDir = Vector2.zero;
+    private Vector2 currentDirVelocity = Vector2.zero;
+    private Vector2 currentMouseDelta = Vector2.zero;
+    private Vector2 currentMouseDeltaVelocity = Vector2.zero;
     public CharacterController controller = null;
 
-    Vector2 currentDir = Vector2.zero;
-    Vector2 currentDirVelocity = Vector2.zero;
-
-    Vector2 currentMouseDelta = Vector2.zero;
-    Vector2 currentMouseDeltaVelocity = Vector2.zero;
     
     void Start()
     {
@@ -74,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         }
         velocityY += gravity * Time.deltaTime;
 
-        Vector3 velocity = (Vector3.ClampMagnitude(transform.forward * currentDir.y + transform.right * currentDir.x, 1.0f)) * walkSpeed + Vector3.up * velocityY;
+        Vector3 velocity = (Vector3.ClampMagnitude(transform.forward * currentDir.y + transform.right * currentDir.x, 1.0f)) * movementSpeed + Vector3.up * velocityY;
 
         controller.Move(velocity * Time.deltaTime);
 
@@ -84,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
         }
 
+        SetMovementSpeed();
         JumpInput();
     }
 
@@ -103,6 +107,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         return false;
+    }
+
+    void SetMovementSpeed()
+    {
+        float speed = Input.GetKey(runKey) ? runSpeed : walkSpeed;
+        movementSpeed = Mathf.Lerp(movementSpeed, speed, Time.deltaTime * runBuildUpSpeed);
+
     }
 
     void JumpInput()

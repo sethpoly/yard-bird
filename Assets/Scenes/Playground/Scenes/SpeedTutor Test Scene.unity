@@ -3895,8 +3895,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2975417178072247926, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: runKey
+      value: 304
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975417178072247926, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: slopeRayLength
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975417178072247926, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: mouseSensitivity
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8772718852818743557, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: m_Name
