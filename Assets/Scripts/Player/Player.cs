@@ -8,7 +8,8 @@ namespace PlayerStates
     {
         IDLE = 0,
         MOVEMENT = 1,
-        DEAD = 2
+        FOCUS = 2,
+        DEAD = 3
     }
 }
 
