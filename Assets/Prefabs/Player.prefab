@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8772718852818743558}
   - component: {fileID: 8772718852818743559}
   - component: {fileID: 2975417178072247929}
+  - component: {fileID: 7541986163199269002}
   - component: {fileID: 2975417178072247926}
   m_Layer: 0
   m_Name: Player
@@ -66,6 +67,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 2975417178072247926}
+--- !u!114 &7541986163199269002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8772718852818743557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc00caf53ce4a4d499d37679c3701bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2975417178072247926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,13 +91,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78981f146f6167a41a325b65b22ca114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 8772718854191855711}
   mouseSensitivity: 3.5
   lockCursor: 1
-  walkSpeed: 6
-  gravity: -13
-  moveSmoothTime: 0.3
   mouseSmoothTime: 0.03
+  playerCamera: {fileID: 8772718854191855711}
+  runSpeed: 10
+  walkSpeed: 6
+  runBuildUpSpeed: 5
+  moveSmoothTime: 0.3
+  slopeForce: 3
+  slopeRayLength: 1.5
+  gravity: -13
   jumpFallOff:
     serializedVersion: 2
     m_Curve:
@@ -111,6 +128,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   jumpMultiplier: 10
   jumpKey: 32
+  runKey: 0
   controller: {fileID: 8772718852818743559}
 --- !u!1 &8772718854191855710
 GameObject:
