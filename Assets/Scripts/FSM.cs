@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Patterns
 {
@@ -41,6 +41,7 @@ namespace Patterns
         {
             if(m_currentState != null) 
             {
+                Debug.Log("Exiting state: " + m_currentState);
                 m_currentState.Exit();
             }
 
@@ -48,6 +49,7 @@ namespace Patterns
 
             if(m_currentState != null)
             {
+                Debug.Log("Entering state: " + m_currentState);
                 m_currentState.Enter();
             }
         }

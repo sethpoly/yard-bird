@@ -6,10 +6,9 @@ namespace PlayerStates
 {
     public enum PlayerFSMStateType
     {
-        MOVEMENT = 0,
-        ATTACK = 1,
-        JUMP = 2,
-        DEAD = 3
+        IDLE = 0,
+        MOVEMENT = 1,
+        DEAD = 2
     }
 }
 
@@ -24,15 +23,21 @@ public class Player : MonoBehaviour
         playerFSM = new PlayerFSM();
 
         // Add FSM states
+        playerFSM.Add(new IdlePlayerState(this));
         playerFSM.Add(new MovementPlayerState(this));
 
         // Set starting state
-        playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.MOVEMENT);
+        playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerFSM.Update();        
+        playerFSM.Update();  
+    }
+
+    void FixedUpdate()
+    {
+        playerFSM.FixedUpdate();
     }
 }
