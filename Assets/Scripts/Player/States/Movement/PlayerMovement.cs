@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -49,6 +48,15 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update() {}
+
+    public bool AnyInput() 
+    {
+        Vector2 moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        bool moveInput = moveVector == Vector2.zero ? false : true;
+        bool jumpInput = Input.GetKeyDown(jumpKey);
+
+        return true ? moveInput || jumpInput : false;
+    }
 
     public void UpdateMouseLook()
     {
@@ -109,14 +117,14 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    void SetMovementSpeed()
+    private void SetMovementSpeed()
     {
         float speed = Input.GetKey(runKey) ? runSpeed : walkSpeed;
         movementSpeed = Mathf.Lerp(movementSpeed, speed, Time.deltaTime * runBuildUpSpeed);
 
     }
 
-    void JumpInput()
+    private void JumpInput()
     {
         if(Input.GetKeyDown(jumpKey) && !isJumping)
         {

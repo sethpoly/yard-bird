@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementPlayerState : PlayerFSMState
 {
+    private bool idleInput = false;
+
     public MovementPlayerState(Player player) : base(player)
     {
         _id = PlayerStates.PlayerFSMStateType.MOVEMENT;
@@ -12,17 +12,24 @@ public class MovementPlayerState : PlayerFSMState
     public override void Enter()
     {
         base.Enter();
+        idleInput = false;
+        _player.playerMovement.UpdateMovement();
     }
 
     public override void Update()
     {
         base.Update();
 
-        // TODO: Add movement logic
+        // Add movement logic
         _player.playerMovement.UpdateMovement();
         _player.playerMovement.UpdateMouseLook();
 
-        // TODO: Add exit logic to change state
+        // Check exit inputs
+        idleInput = _player.playerMovement.controller.velocity == Vector3.zero && _player.playerMovement.controller.isGrounded;
+
+        // Perform exit patterns for inputs
+        if(idleInput)
+            _player.playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
     }
 
     public override void FixedUpdate()
