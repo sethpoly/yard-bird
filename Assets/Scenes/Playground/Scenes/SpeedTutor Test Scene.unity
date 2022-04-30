@@ -4029,6 +4029,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2379642421129733435, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 876759155}
     - target: {fileID: 2975417178072247926, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: runKey
       value: 304

@@ -5,6 +5,7 @@ public class IdlePlayerState : PlayerFSMState
 {
 
     private bool movementInput = false;
+    private bool focusInput = false;
 
     public IdlePlayerState(Player player): base(player) 
     {
@@ -15,6 +16,7 @@ public class IdlePlayerState : PlayerFSMState
     {
         base.Enter();
         movementInput = false;
+        focusInput = false;
     }
 
     public override void Update()
@@ -26,10 +28,14 @@ public class IdlePlayerState : PlayerFSMState
 
         // Check exit inputs
         movementInput = _player.playerMovement.AnyInput();
+        focusInput = _player.playerFocus.AnyInput();
 
         // Perform exits from inputs
         if(movementInput)
             _player.playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.MOVEMENT);
+
+        if(focusInput)
+            _player.playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.FOCUS);
     }
 
     public override void FixedUpdate()

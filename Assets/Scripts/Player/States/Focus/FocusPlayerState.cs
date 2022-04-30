@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FocusPlayerState : PlayerFSMState
 {
+    private bool idleInput = false;
+
     public FocusPlayerState(Player player): base(player)
     {
         _id = PlayerStates.PlayerFSMStateType.FOCUS;
@@ -12,17 +14,23 @@ public class FocusPlayerState : PlayerFSMState
     public override void Enter()
     {
         base.Enter();
+        idleInput = false;
     }
 
     public override void Update()
     {
         base.Update();
 
-        // Add movement logic
+        // Add state logic
+        // TODO: _player.playerFocus.UpdateMouse();
+        _player.playerFocus.UpdateAction();
 
         // Check exit inputs
+        idleInput = _player.playerMovement.controller.velocity == Vector3.zero && _player.playerMovement.controller.isGrounded && !_player.playerFocus.AnyInput();
 
         // Perform exit patterns for inputs
+        if(idleInput)
+            _player.playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
     }
 
     public override void FixedUpdate()
