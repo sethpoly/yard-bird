@@ -5,33 +5,47 @@ using UnityEngine;
 public class PlayerFocus : MonoBehaviour
 {
     [SerializeField] private KeyCode focusKey;
-
     [SerializeField] private Transform hand;
-    private float handPitch = 0.0f;
-    private Vector2 currentMouseDelta = Vector2.zero;
-    private Vector2 currentMouseDeltaVelocity = Vector2.zero;
+    [SerializeField] private float dragSpeed = 1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool dragging = false;
+
+    void Start() {}
 
     // Update focus action of moving "hand" forward and back in a thrusting motion
     public void UpdateAction()
     {
-        Vector2 targetMouseDelta = new Vector2(0, Input.GetAxis("Mouse Y"));
+        // Axis direction to move hand transform
+        float axis = 0;
 
-        currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, 0f);
+        // Determine if we are dragging
+        dragging = AnyInput();
 
-        handPitch -= currentMouseDelta.y * 5f;
-        handPitch = Mathf.Clamp(handPitch, -90.0f, 90.0f);
+        // If not holding focus button, return
+        if (!dragging || !this.enabled)
+            return;
+        
+        // If focus released, reset flag this frame
+        if (Input.GetKeyUp(focusKey))
+            dragging = false;
+ 
+        // Retrieve if mouse is moving up or down
+        axis = Input.GetAxis("Mouse Y") > 0 ? 1f : -1f; 
 
-        hand.localEulerAngles = Vector3.right * handPitch;
-
-        hand.Rotate(Vector3.up * currentMouseDelta.x * 5f);
+        // Apply translation only during mouse movement
+        if(HasMouseYMoved()) 
+            hand.Translate(Vector3.forward * (dragSpeed * axis) * Time.deltaTime);
     }
 
+
+    // Determine if mouseY has moved this frame    
+    private bool HasMouseYMoved()
+    {
+        //I feel dirty even doing this 
+        return (Input.GetAxis("Mouse Y") != 0);
+    }
+
+    
     // Check if relevant input should set this state as current
     public bool AnyInput()
     {

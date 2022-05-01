@@ -23,11 +23,11 @@ public class FocusPlayerState : PlayerFSMState
 
         // Add state logic
         // TODO: _player.playerFocus.UpdateMouse();
-        _player.playerFocus.UpdateAction();
+         _player.playerFocus.UpdateAction();
 
         // Check exit inputs
-        idleInput = _player.playerMovement.controller.velocity == Vector3.zero && _player.playerMovement.controller.isGrounded && !_player.playerFocus.AnyInput();
-
+        idleInput = !_player.playerFocus.AnyInput();
+        
         // Perform exit patterns for inputs
         if(idleInput)
             _player.playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
