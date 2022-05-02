@@ -7,6 +7,7 @@ public class PlayerFocus : MonoBehaviour
     [SerializeField] private KeyCode focusKey;
     [SerializeField] private Transform hand;
     [SerializeField] private float dragSpeed = 1f;
+    [SerializeField] private float maxFocusDistance = .55f;
 
     private bool dragging = false;
     private bool resetting = false;
@@ -14,12 +15,6 @@ public class PlayerFocus : MonoBehaviour
 
     private void Start() {
         startHandPosition = hand.localPosition;
-    }
-
-    // Set the start hand position to reset the focus on state enter
-    public void SetStartHandPosition()
-    {
-        //startHandPosition = hand.localPosition;
     }
 
     // Update focus action of moving "hand" forward and back in a thrusting motion
@@ -41,29 +36,29 @@ public class PlayerFocus : MonoBehaviour
             Vector3 dir = Vector3.forward * (dragSpeed * axis) * Time.deltaTime;
 
             // Correct localPosition
-            // if(hand.localPosition.z > startHandPosition.z + .55f)
-            // {
-            //     Vector3 foo = new Vector3(hand.localPosition.x, hand.localPosition.y, hand.localPosition.z + .55f);
-            //     hand.localPosition = Vector3.MoveTowards(hand.localPosition, foo, dragSpeed * Time.deltaTime);
-            // }
-
-            // if(hand.localPosition.z < startHandPosition.z)
-            // {
-            //     hand.localPosition = Vector3.MoveTowards(hand.localPosition, startHandPosition, dragSpeed * Time.deltaTime);
-            // }
-
+            ClampFocusDistance();
+            
             // Apply translation only during mouse movement
             if(HasMouseYMoved()) 
-                if(hand.localPosition.z >= startHandPosition.z && hand.localPosition.z < startHandPosition.z + .55f) 
-                {
+            {
+                if(hand.localPosition.z >= startHandPosition.z && hand.localPosition.z < startHandPosition.z + maxFocusDistance) 
                     hand.Translate(dir);
-                }
+            }
         }
         else 
         {
             // Start resetting focus
             ResetAction();
         }
+    }
+
+    // Clamp focus reach between bounds
+    private void ClampFocusDistance()
+    {
+        if(hand.localPosition.z > startHandPosition.z + maxFocusDistance)
+            hand.localPosition = Vector3.MoveTowards(hand.localPosition, startHandPosition, dragSpeed * Time.deltaTime);
+        else if(hand.localPosition.z < startHandPosition.z)
+            hand.localPosition = Vector3.MoveTowards(hand.localPosition, startHandPosition, dragSpeed * Time.deltaTime);
     }
 
     private void ResetAction()
