@@ -12,10 +12,14 @@ public class PlayerFocus : MonoBehaviour
     private bool resetting = false;
     private Vector3 startHandPosition;
 
+    private void Start() {
+        startHandPosition = hand.localPosition;
+    }
+
     // Set the start hand position to reset the focus on state enter
     public void SetStartHandPosition()
     {
-        startHandPosition = hand.position;
+        //startHandPosition = hand.localPosition;
     }
 
     // Update focus action of moving "hand" forward and back in a thrusting motion
@@ -34,10 +38,26 @@ public class PlayerFocus : MonoBehaviour
     
             // Retrieve if mouse is moving up or down
             axis = Input.GetAxis("Mouse Y") > 0 ? 1f : -1f; 
+            Vector3 dir = Vector3.forward * (dragSpeed * axis) * Time.deltaTime;
+
+            // Correct localPosition
+            // if(hand.localPosition.z > startHandPosition.z + .55f)
+            // {
+            //     Vector3 foo = new Vector3(hand.localPosition.x, hand.localPosition.y, hand.localPosition.z + .55f);
+            //     hand.localPosition = Vector3.MoveTowards(hand.localPosition, foo, dragSpeed * Time.deltaTime);
+            // }
+
+            // if(hand.localPosition.z < startHandPosition.z)
+            // {
+            //     hand.localPosition = Vector3.MoveTowards(hand.localPosition, startHandPosition, dragSpeed * Time.deltaTime);
+            // }
 
             // Apply translation only during mouse movement
             if(HasMouseYMoved()) 
-                hand.Translate(Vector3.forward * (dragSpeed * axis) * Time.deltaTime);
+                if(hand.localPosition.z >= startHandPosition.z && hand.localPosition.z < startHandPosition.z + .55f) 
+                {
+                    hand.Translate(dir);
+                }
         }
         else 
         {
@@ -48,11 +68,10 @@ public class PlayerFocus : MonoBehaviour
 
     private void ResetAction()
     {
-        Debug.Log("Resetting");
         resetting = true;
-        hand.position = Vector3.MoveTowards(hand.position, startHandPosition, dragSpeed * Time.deltaTime);
+        hand.localPosition = Vector3.MoveTowards(hand.localPosition, startHandPosition, dragSpeed * Time.deltaTime);
 
-        if(hand.position == startHandPosition) {
+        if(hand.localPosition == startHandPosition) {
             resetting = false;
         }
     }
