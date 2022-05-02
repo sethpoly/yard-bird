@@ -12,7 +12,9 @@ public class PlayerFocus : MonoBehaviour
     private bool resetting = false;
     private Vector3 startHandPosition;
 
-    void Start() {
+    // Set the start hand position to reset the focus on state enter
+    public void SetStartHandPosition()
+    {
         startHandPosition = hand.position;
     }
 
@@ -24,44 +26,41 @@ public class PlayerFocus : MonoBehaviour
 
         // Determine if we are dragging
         dragging = Input.GetKey(focusKey);
-        //ResetAction();
-
-        // If not holding focus button, return
-        if (!dragging || !this.enabled)
-            return;
         
-        //startHandPosition = hand.position;
+        if(dragging) 
+        {
+            if (Input.GetKeyUp(focusKey))
+                dragging = false;
+    
+            // Retrieve if mouse is moving up or down
+            axis = Input.GetAxis("Mouse Y") > 0 ? 1f : -1f; 
 
-        // If focus released, reset flag this frame
-        if (Input.GetKeyUp(focusKey))
-            dragging = false;
- 
-        // Retrieve if mouse is moving up or down
-        axis = Input.GetAxis("Mouse Y") > 0 ? 1f : -1f; 
-
-        // Apply translation only during mouse movement
-        if(HasMouseYMoved()) 
-            hand.Translate(Vector3.forward * (dragSpeed * axis) * Time.deltaTime);
+            // Apply translation only during mouse movement
+            if(HasMouseYMoved()) 
+                hand.Translate(Vector3.forward * (dragSpeed * axis) * Time.deltaTime);
+        }
+        else 
+        {
+            // Start resetting focus
+            ResetAction();
+        }
     }
 
     private void ResetAction()
     {
-        if(!dragging)
-        {
-            Debug.Log("Resetting");
-            resetting = true;
-            hand.position = Vector3.MoveTowards(hand.position, startHandPosition, dragSpeed * Time.deltaTime);
+        Debug.Log("Resetting");
+        resetting = true;
+        hand.position = Vector3.MoveTowards(hand.position, startHandPosition, dragSpeed * Time.deltaTime);
 
-        }
-        else 
+        if(hand.position == startHandPosition) {
             resetting = false;
+        }
     }
 
 
     // Determine if mouseY has moved this frame    
     private bool HasMouseYMoved()
     {
-        //I feel dirty even doing this 
         return (Input.GetAxis("Mouse Y") != 0);
     }
 

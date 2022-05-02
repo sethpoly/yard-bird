@@ -15,6 +15,7 @@ public class FocusPlayerState : PlayerFSMState
     {
         base.Enter();
         idleInput = false;
+        _player.playerFocus.SetStartHandPosition();
     }
 
     public override void Update()
