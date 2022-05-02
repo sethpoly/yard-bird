@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerFocus : MonoBehaviour
 {
+
     [SerializeField] private KeyCode focusKey;
     [SerializeField] private Transform hand;
     [SerializeField] private float dragSpeed = 1f;
@@ -16,6 +17,7 @@ public class PlayerFocus : MonoBehaviour
     private void Start() {
         startHandPosition = hand.localPosition;
     }
+
 
     // Update focus action of moving "hand" forward and back in a thrusting motion
     public void UpdateAction()

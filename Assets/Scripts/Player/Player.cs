@@ -19,18 +19,17 @@ public class Player : MonoBehaviour
 
     public PlayerMovement playerMovement;
     public PlayerFocus playerFocus;
+    public Hand hand;
 
     void Start()
     {
         playerFSM = new PlayerFSM();
 
         // Add FSM states
-        playerFSM.Add(new IdlePlayerState(this));
         playerFSM.Add(new MovementPlayerState(this));
-        playerFSM.Add(new FocusPlayerState(this));
 
         // Set starting state
-        playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
+        playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.MOVEMENT);
     }
 
     // Update is called once per frame

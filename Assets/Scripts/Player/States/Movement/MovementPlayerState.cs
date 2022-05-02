@@ -13,23 +13,16 @@ public class MovementPlayerState : PlayerFSMState
     {
         base.Enter();
         idleInput = false;
-        _player.playerMovement.UpdateMovement();
     }
 
     public override void Update()
     {
         base.Update();
 
-        // Add movement logic
+        // Add logic
         _player.playerMovement.UpdateMovement();
         _player.playerMovement.UpdateMouseLook();
-
-        // Check exit inputs
-        idleInput = _player.playerMovement.controller.velocity == Vector3.zero && _player.playerMovement.controller.isGrounded;
-
-        // Perform exit patterns for inputs
-        if(idleInput)
-            _player.playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
+        _player.hand.UpdatePoke();
     }
 
     public override void FixedUpdate()

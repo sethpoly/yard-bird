@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float walkSpeed = 6f;
     [SerializeField] private float runBuildUpSpeed = 5f;
-    [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.3f;
+    [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 20f;
     [SerializeField] private float slopeForce = 3f;
     [SerializeField] private float slopeRayLength = 1.5f;
 
@@ -55,7 +55,11 @@ public class PlayerMovement : MonoBehaviour
         bool moveInput = moveVector == Vector2.zero ? false : true;
         bool jumpInput = Input.GetKeyDown(jumpKey);
 
-        return true ? moveInput || jumpInput : false;
+        if(moveInput || jumpInput)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void UpdateMouseLook()
