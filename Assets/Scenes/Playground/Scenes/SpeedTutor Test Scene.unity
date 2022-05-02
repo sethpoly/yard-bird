@@ -1272,7 +1272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 916c4b5588eefb0468cb6129e48496d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4029,6 +4029,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2379642421129733435, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 876759155}
+    - target: {fileID: 2379642421129733435, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: dragSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2975417178072247926, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: runKey
       value: 304
@@ -4088,6 +4096,10 @@ PrefabInstance:
     - target: {fileID: 8772718852818743558, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772718854191855710, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd8713528d82e324e94a63f953ec9881, type: 3}

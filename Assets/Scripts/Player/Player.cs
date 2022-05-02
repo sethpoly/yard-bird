@@ -8,7 +8,8 @@ namespace PlayerStates
     {
         IDLE = 0,
         MOVEMENT = 1,
-        DEAD = 2
+        FOCUS = 2,
+        DEAD = 3
     }
 }
 
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     public PlayerFSM playerFSM = null;
 
     public PlayerMovement playerMovement;
+    public PlayerFocus playerFocus;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
         // Add FSM states
         playerFSM.Add(new IdlePlayerState(this));
         playerFSM.Add(new MovementPlayerState(this));
+        playerFSM.Add(new FocusPlayerState(this));
 
         // Set starting state
         playerFSM.SetCurrentState(PlayerStates.PlayerFSMStateType.IDLE);
