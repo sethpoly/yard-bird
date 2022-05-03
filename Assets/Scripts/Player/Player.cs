@@ -16,9 +16,7 @@ namespace PlayerStates
 public class Player : MonoBehaviour
 {
     public PlayerFSM playerFSM = null;
-
     public PlayerMovement playerMovement;
-    public PlayerFocus playerFocus;
     public Hand hand;
 
     void Start()

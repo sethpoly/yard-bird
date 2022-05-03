@@ -1271,38 +1271,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed4c4a6a3827d6545b9bf7b552df621b, type: 3}
---- !u!1 &471235057 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8772718852818743557, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
-  m_PrefabInstance: {fileID: 2975417178509828335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &471235063 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
   m_PrefabInstance: {fileID: 2975417178509828335}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471235057}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9282f280cad8c6f4a830aaeb0a437eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &471235064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471235057}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4397934cec99f314d83a6e867c755f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  focusKey: 0
-  hand: {fileID: 0}
-  dragSpeed: 1
-  maxFocusDistance: 0.55
 --- !u!4 &536034910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4261933636434198, guid: 20b83b6c7039f5d47beac9ffafe09d6e, type: 3}
@@ -1336,7 +1315,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 555565378}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -4621,11 +4600,15 @@ PrefabInstance:
     - target: {fileID: 2975417178072247929, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: playerFocus
       value: 
-      objectReference: {fileID: 471235064}
+      objectReference: {fileID: 0}
     - target: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: hand
       value: 
       objectReference: {fileID: 876759155}
+    - target: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: skewer
+      value: 
+      objectReference: {fileID: 555565382}
     - target: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: dragSpeed
       value: 4
