@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2975417178072247929}
   - component: {fileID: 2975417178072247926}
   - component: {fileID: 3154537848560951364}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -68,6 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 2975417178072247926}
   playerFocus: {fileID: 0}
+  hand: {fileID: 0}
 --- !u!114 &2975417178072247926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +136,7 @@ MonoBehaviour:
   hand: {fileID: 0}
   dragSpeed: 1
   maxFocusDistance: 0.55
+  focusHitDistanceInMeters: 2
 --- !u!1 &8772718854191855710
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +148,7 @@ GameObject:
   - component: {fileID: 8772718854191855711}
   - component: {fileID: 8772718854191855705}
   - component: {fileID: 8772718854191855704}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

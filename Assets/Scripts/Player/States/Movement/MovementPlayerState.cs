@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class MovementPlayerState : PlayerFSMState
 {
-    private bool idleInput = false;
-
     public MovementPlayerState(Player player) : base(player)
     {
         _id = PlayerStates.PlayerFSMStateType.MOVEMENT;
@@ -12,7 +10,6 @@ public class MovementPlayerState : PlayerFSMState
     public override void Enter()
     {
         base.Enter();
-        idleInput = false;
     }
 
     public override void Update()
