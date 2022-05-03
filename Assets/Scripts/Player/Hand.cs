@@ -13,7 +13,7 @@ public class Hand : MonoBehaviour
 
     [SerializeField] private KeyCode pokeKey;
     [SerializeField] private Transform hand;
-    [SerializeField] private Transform skewer;
+    [SerializeField] private Transform skewerTip;
     [SerializeField] private float dragSpeed = 1f;
     [SerializeField] private float maxFocusDistance = .8f;
     [SerializeField] private int focusHitDistanceInMeters = 2;
@@ -83,6 +83,6 @@ public class Hand : MonoBehaviour
 
         IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
         if(interactable != null) 
-            interactable.Interaction(skewer.gameObject);
+            interactable.Interaction(skewerTip.gameObject);
     }
 }
