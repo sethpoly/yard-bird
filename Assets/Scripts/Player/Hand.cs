@@ -14,7 +14,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private KeyCode pokeKey;
     [SerializeField] private Transform hand;
     [SerializeField] private float dragSpeed = 1f;
-    [SerializeField] private float maxFocusDistance = .55f;
+    [SerializeField] private float maxFocusDistance = .8f;
 
     private PokeState pokeState = PokeState.NONE;
     private Vector3 startHandPosition;
@@ -50,7 +50,7 @@ public class Hand : MonoBehaviour
 
         // Exit condition
         if(hand.localPosition.z >= targetPosition.z)
-            pokeState = PokeState.RESET;
+           pokeState = PokeState.RESET;
     }
 
     private void UpdateResetState()
