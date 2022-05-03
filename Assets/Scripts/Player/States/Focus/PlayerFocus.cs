@@ -15,7 +15,7 @@ public class PlayerFocus : MonoBehaviour
     private Vector3 startHandPosition;
 
     private void Start() {
-        startHandPosition = hand.localPosition;
+        //startHandPosition = hand.localPosition;
     }
 
 

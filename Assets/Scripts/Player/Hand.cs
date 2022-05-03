@@ -14,7 +14,9 @@ public class Hand : MonoBehaviour
     [SerializeField] private KeyCode pokeKey;
     [SerializeField] private Transform hand;
     [SerializeField] private float dragSpeed = 1f;
-    [SerializeField] private float maxFocusDistance = .55f;
+    [SerializeField] private float maxFocusDistance = .8f;
+    [SerializeField] private int focusHitDistanceInMeters = 2;
+    [SerializeField] private LayerMask focusHitLayer;
 
     private PokeState pokeState = PokeState.NONE;
     private Vector3 startHandPosition;
@@ -50,7 +52,10 @@ public class Hand : MonoBehaviour
 
         // Exit condition
         if(hand.localPosition.z >= targetPosition.z)
+        {
             pokeState = PokeState.RESET;
+            FireRay();
+        }
     }
 
     private void UpdateResetState()
@@ -60,5 +65,23 @@ public class Hand : MonoBehaviour
         // Exit condition
         if(hand.localPosition.z <= startHandPosition.z)
             pokeState = PokeState.NONE;
+    }
+
+    private void FireRay()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Debug.DrawRay(ray.origin, ray.direction * 10);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, focusHitDistanceInMeters, focusHitLayer))
+            ProcessRaycastHit(hit);
+    }
+
+    private void ProcessRaycastHit(RaycastHit hit)
+    {
+        Debug.Log("We hit a " + hit.collider.gameObject.name);
+
+        IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+        if(interactable != null) 
+            interactable.Interaction();
     }
 }
