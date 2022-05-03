@@ -23,10 +23,10 @@ public class FocusPlayerState : PlayerFSMState
 
         // Add state logic
         // TODO: _player.playerFocus.UpdateMouse();
-        _player.playerFocus.UpdateAction();
+        //_player.playerFocus.UpdateAction();
 
         // Check exit inputs
-        idleInput = !_player.playerFocus.AnyInput();
+        //idleInput = !_player.playerFocus.AnyInput();
 
         // Perform exit patterns for inputs
         if(idleInput)
