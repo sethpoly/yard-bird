@@ -1384,17 +1384,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed4c4a6a3827d6545b9bf7b552df621b, type: 3}
---- !u!114 &471235063 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
-  m_PrefabInstance: {fileID: 2975417178509828335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9282f280cad8c6f4a830aaeb0a437eac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &492817178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3783527135916820607, guid: ed4c4a6a3827d6545b9bf7b552df621b, type: 3}
@@ -1478,6 +1467,7 @@ GameObject:
   - component: {fileID: 555565382}
   - component: {fileID: 555565381}
   - component: {fileID: 555565380}
+  - component: {fileID: 555565383}
   m_Layer: 3
   m_Name: Skewer
   m_TagString: Untagged
@@ -1551,6 +1541,28 @@ Transform:
   m_Father: {fileID: 876759155}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &555565383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555565378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9282f280cad8c6f4a830aaeb0a437eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokeKey: 323
+  hand: {fileID: 876759155}
+  pokerTip: {fileID: 812137436}
+  dragSpeed: 4
+  maxPokePhysicalDistance: 0.8
+  pokeReachInMeters: 3
+  pokeHitLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  pokedItems: []
 --- !u!1001 &588605607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2372,6 +2384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 876759155}
+  - component: {fileID: 876759156}
   m_Layer: 3
   m_Name: Hand
   m_TagString: Untagged
@@ -2395,6 +2408,19 @@ Transform:
   m_Father: {fileID: 1599463436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -5, y: -5, z: 0}
+--- !u!114 &876759156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876759154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1690c2060a93441b42444827ec844a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipped: {fileID: 555565383}
 --- !u!1 &943226306
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,7 +5092,7 @@ PrefabInstance:
     - target: {fileID: 2975417178072247929, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: hand
       value: 
-      objectReference: {fileID: 471235063}
+      objectReference: {fileID: 876759156}
     - target: {fileID: 2975417178072247929, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: playerFocus
       value: 
@@ -5082,6 +5108,10 @@ PrefabInstance:
     - target: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: dragSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
       propertyPath: skewerTip
@@ -5159,5 +5189,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: MainCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3154537848560951364, guid: bd8713528d82e324e94a63f953ec9881, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bd8713528d82e324e94a63f953ec9881, type: 3}

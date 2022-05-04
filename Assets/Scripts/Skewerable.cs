@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Skewerable : MonoBehaviour, IInteractable
 {
-
     private Rigidbody rb;
     private Transform stuckTo = null;
     private Quaternion randomRotation;
@@ -25,7 +24,7 @@ public class Skewerable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interaction(GameObject interacter) 
+    public bool Interaction(GameObject interacter) 
     {
         Debug.Log("Trying to interact with a Skewerable object!");
 
@@ -36,7 +35,9 @@ public class Skewerable : MonoBehaviour, IInteractable
         if(stuckTo == null || stuckTo != interacter.transform)
         {
             stuckTo = interacter.transform;
+            return true;
         }
+        return false;
     }
 }
 

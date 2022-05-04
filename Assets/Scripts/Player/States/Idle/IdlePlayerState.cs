@@ -30,7 +30,7 @@ public class IdlePlayerState : PlayerFSMState
 
         // Add state logic
         _player.playerMovement.UpdateMouseLook();
-        _player.hand.UpdatePoke();
+        _player.hand.UpdateEquipmentLogic();
     }
 
     public override void FixedUpdate()
