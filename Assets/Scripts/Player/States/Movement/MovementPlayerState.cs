@@ -19,7 +19,7 @@ public class MovementPlayerState : PlayerFSMState
         // Add logic
         _player.playerMovement.UpdateMovement();
         _player.playerMovement.UpdateMouseLook();
-        _player.hand.UpdatePoke();
+        _player.hand.UpdateEquipmentLogic();
     }
 
     public override void FixedUpdate()
