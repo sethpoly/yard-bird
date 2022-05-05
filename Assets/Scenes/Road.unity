@@ -1279,7 +1279,9 @@ MonoBehaviour:
   spawnablePrefab: {fileID: 3673361784671537817, guid: d266f908008e58d4fa45f43b6bdb4212, type: 3}
   objectsToSpawn: 40
   minimumDistance: 2.5
-  minimumHeight: -2.5
+  minimumHeight: -3
+  maximumHeight: -1
+  boundsOffset: 2
 --- !u!1001 &417372971
 PrefabInstance:
   m_ObjectHideFlags: 0

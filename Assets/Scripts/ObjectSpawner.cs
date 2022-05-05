@@ -10,6 +10,8 @@ public class ObjectSpawner : MonoBehaviour
     public int objectsToSpawn;
     public float minimumDistance = 50f;
     public float minimumHeight = -1f;
+    public float maximumHeight = 0f;
+    public float boundsOffset = 2f;
 
  
     // Plane Properties
@@ -20,8 +22,8 @@ public class ObjectSpawner : MonoBehaviour
         containedSpawnArea = transform.GetComponent<MeshFilter>().mesh;
 
         // Get the length and width of the plane
-        x_dim = containedSpawnArea.bounds.size.x;
-        y_dim = containedSpawnArea.bounds.size.z;
+        x_dim = containedSpawnArea.bounds.size.x - boundsOffset;
+        y_dim = containedSpawnArea.bounds.size.z - boundsOffset;
 
         for(int i = 0; i <= objectsToSpawn; i++)
             Spawn();
@@ -34,7 +36,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             randpos = Vector3.zero;
             randpos.x = Random.Range(-x_dim/2f, x_dim/2f);      
-            randpos.y = Random.Range(minimumHeight, 0f);    
+            randpos.y = Random.Range(minimumHeight, maximumHeight);    
             randpos.z = Random.Range(-y_dim/2f, y_dim/2f);
 
             if(!IsTooClose(randpos, minimumDistance, spawnedPrefabs)) 
