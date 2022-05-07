@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Any GameObject that is able to be skewered should equip this script, 
+/// allows the GameObject to change it's origin to the interacter's origin,
+/// passes a reference to this GameObject to an array the interacter holds
+/// </summary>
 public class Skewerable : MonoBehaviour, IInteractable
 {
     private Rigidbody rb;
