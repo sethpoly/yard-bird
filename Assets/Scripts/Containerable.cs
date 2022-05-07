@@ -10,10 +10,11 @@ public class Containerable : MonoBehaviour, IInteractable
 {
     public bool Interaction(GameObject interacter) 
     {
-        Debug.Log("Trying to interact with Containerable object!");
-
-        // TODO: place the *iteracter* object at x,y,z of this gameObject
-        // It fill "fall into place"
+        Debug.Log("Trying to interact with Containerable object with " + interacter.name);
+        
+        Skewerable skewerable = interacter.GetComponent<Skewerable>();
+        skewerable.SetIdle();
+        skewerable.transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
 
         return true;
     }
