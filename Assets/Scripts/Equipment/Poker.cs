@@ -154,6 +154,6 @@ public class Poker : Equipment
     private void RemovePokedItem(GameObject item)
     {
         pokedItems.Remove(item);
-        Destroy(item);
+        //Destroy(item);
     }
 }

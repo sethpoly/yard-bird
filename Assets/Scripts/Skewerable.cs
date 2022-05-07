@@ -32,7 +32,11 @@ public class Skewerable : MonoBehaviour, IInteractable
     public bool Interaction(GameObject interacter) 
     {
         Debug.Log("Trying to interact with a Skewerable object!");
+        return SetSkewered(interacter);
+    }
 
+    private bool SetSkewered(GameObject interacter)
+    {
         // Reassign position
         rb.detectCollisions = false;
         rb.isKinematic = true;
@@ -43,6 +47,14 @@ public class Skewerable : MonoBehaviour, IInteractable
             return true;
         }
         return false;
+    }
+
+    public void SetIdle()
+    {
+        // Reassign position
+        rb.detectCollisions = true;
+        rb.isKinematic = false;
+        stuckTo = null;
     }
 }
 
