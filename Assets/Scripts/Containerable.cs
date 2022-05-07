@@ -10,10 +10,13 @@ public class Containerable : MonoBehaviour, IInteractable
 {
     public bool Interaction(GameObject interacter) 
     {
-        Debug.Log("Trying to interact with Containerable object!");
+        Debug.Log("Trying to interact with Containerable object with " + interacter.name);
 
         // TODO: place the *iteracter* object at x,y,z of this gameObject
         // It fill "fall into place"
+
+        //interacter.transform.position = transform.position;
+        
 
         return true;
     }

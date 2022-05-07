@@ -92,10 +92,10 @@ public class Poker : Equipment
     {
         Debug.Log("We hit a " + hit.collider.gameObject.name);
 
-        IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
-        if(interactable != null) 
+        Skewerable skewerable = hit.collider.gameObject.GetComponent<Skewerable>();
+        if(skewerable != null) 
         {
-            bool isSuccessful = interactable.Interaction(pokerTip.gameObject);
+            bool isSuccessful = skewerable.Interaction(pokerTip.gameObject);
 
             // Append item to list of interact succeeded
             if(isSuccessful)
@@ -125,7 +125,7 @@ public class Poker : Equipment
         Vector3 direction = player.transform.forward;
         if (Physics.SphereCast(origin, thickness, direction, out hit, maxDistance, objectLayer)) 
         {
-            Debug.Log("We hit a " + hit.collider.gameObject.name);
+            //Debug.Log("We hit a " + hit.collider.gameObject.name);
             return hit;
         }
         return null;
