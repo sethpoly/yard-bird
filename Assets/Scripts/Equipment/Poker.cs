@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment: MonoBehaviour {
-    public virtual void CheckMainUse(){}
+public abstract class Equipment: MonoBehaviour {
+    public abstract void CheckMainUse();
+    public virtual void CheckAltUse(){
+        Debug.Log("Alt use not implemented");
+    }
 }
 
 public class Poker : Equipment
@@ -14,14 +17,15 @@ public class Poker : Equipment
         POKE,
         RESET
     }
-
+    [SerializeField] private Player player;
     [SerializeField] private KeyCode pokeKey;
+    [SerializeField] private KeyCode altKey = KeyCode.E;
     [SerializeField] private Transform hand;
     [SerializeField] private Transform pokerTip;
     [SerializeField] private float dragSpeed = 1f;
     [SerializeField] private float maxPokePhysicalDistance = .8f;
     [SerializeField] private int pokeReachInMeters = 2;
-    [SerializeField] private LayerMask pokeHitLayer;
+    [SerializeField] private LayerMask objectLayer;
 
     // List of items currently skewered by skewer
     [SerializeField] private List<GameObject> pokedItems = new List<GameObject>();
@@ -80,7 +84,7 @@ public class Poker : Equipment
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Debug.DrawRay(ray.origin, ray.direction * 10);
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, pokeReachInMeters, pokeHitLayer))
+        if(Physics.Raycast(ray, out hit, pokeReachInMeters, objectLayer))
             ProcessRaycastHit(hit);
     }
 
@@ -100,6 +104,48 @@ public class Poker : Equipment
         }
     }
 
+    override public void CheckAltUse() 
+    {
+        RaycastHit? hit = FireSphereCast();
+
+        if(hit.HasValue)
+        {
+            // Check Input
+            if(Input.GetKeyDown(altKey))
+                ProcessSphereCast(hit.Value);
+        }
+    }
+
+    private RaycastHit? FireSphereCast()
+    {
+        float thickness =  player.playerMovement.controller.height / 5;
+        float maxDistance = 2f;
+        RaycastHit hit;
+        Vector3 origin = player.transform.position + player.playerMovement.controller.center;
+        Vector3 direction = player.transform.forward;
+        if (Physics.SphereCast(origin, thickness, direction, out hit, maxDistance, objectLayer)) 
+        {
+            Debug.Log("We hit a " + hit.collider.gameObject.name);
+            return hit;
+        }
+        return null;
+    }
+
+    private void ProcessSphereCast(RaycastHit hit)
+    {
+        Containerable container = hit.collider.gameObject.GetComponent<Containerable>();
+            if(container != null) 
+            {
+                // Get next can saved
+                if(pokedItems.Count <= 0) { return; }
+
+                // Pass can to object we interacted with
+                GameObject nextCan = pokedItems[0];
+                if(container.Interaction(nextCan))
+                    RemovePokedItem(nextCan);
+            }   
+    }
+
     private void AppendPokedItem(GameObject item)
     {
         pokedItems.Add(item);
@@ -107,6 +153,7 @@ public class Poker : Equipment
 
     private void RemovePokedItem(GameObject item)
     {
-
+        pokedItems.Remove(item);
+        Destroy(item);
     }
 }
