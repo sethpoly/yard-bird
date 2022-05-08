@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    
     private List<Transform> spawnedPrefabs = new List<Transform>();
-    private Mesh containedSpawnArea;
+    private Mesh containedMeshArea;
+    private TerrainData containedTerrainArea;
     public GameObject spawnablePrefab;
     public int objectsToSpawn;
-    public float minimumDistance = 50f;
+    public float minimumDistance = 2.5f;
     public float minimumHeight = -1f;
     public float maximumHeight = 0f;
     public float boundsOffset = 2f;
@@ -19,11 +21,22 @@ public class ObjectSpawner : MonoBehaviour
     float y_dim;
  
     void Start () {
-        containedSpawnArea = transform.GetComponent<MeshFilter>().mesh;
+        if(transform.GetComponent<MeshFilter>()) 
+        {
+            containedMeshArea = transform.GetComponent<MeshFilter>().mesh;
 
-        // Get the length and width of the plane
-        x_dim = containedSpawnArea.bounds.size.x - boundsOffset;
-        y_dim = containedSpawnArea.bounds.size.z - boundsOffset;
+            // Get the length and width of the plane
+            x_dim = containedMeshArea.bounds.size.x - boundsOffset;
+            y_dim = containedMeshArea.bounds.size.z - boundsOffset;
+        } 
+        else if(transform.GetComponent<Terrain>())
+        {
+            containedTerrainArea = transform.GetComponent<Terrain>().terrainData;
+
+            // Get the length and width of the plane
+            x_dim = containedTerrainArea.bounds.size.x;// - boundsOffset;
+            y_dim = containedTerrainArea.bounds.size.z;// - boundsOffset;   
+        }
 
         for(int i = 0; i <= objectsToSpawn; i++)
             Spawn();
