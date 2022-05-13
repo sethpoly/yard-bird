@@ -47,7 +47,10 @@ public class Poker : Equipment
         if(hand != null)
         {
             // Orient poker
-            
+            this.transform.localPosition = new Vector3(-0.04f, 0.09f, -0.75f);
+            this.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+            this.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+
             // Save start orientation
             startHandPosition = hand.localPosition;
         }

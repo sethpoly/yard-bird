@@ -60,6 +60,7 @@ public class EquipmentDetection : MonoBehaviour
             Debug.Log("Trying to process equipment found...");
             equipment.AttachEquipment(player, hand.transform);
             hand.Equip(equipment);
+            equipment.Setup();
         }   
     }
 
