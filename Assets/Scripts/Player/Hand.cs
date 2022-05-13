@@ -8,7 +8,16 @@ public class Hand : MonoBehaviour
 
     public void UpdateEquipmentLogic() 
     {
-        equipped.CheckMainUse();
-        equipped.CheckAltUse();
+        if(equipped != null)
+        {
+            equipped.CheckMainUse();
+            equipped.CheckAltUse();
+        }
+    }
+
+    public void Equip(Equipment equipment)
+    {
+        equipped = equipment;
+        equipment.transform.SetParent(this.transform);
     }
 }
