@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-    public Equipment equipped;
+    public Equipment equipped = null;
 
     public void UpdateEquipmentLogic() 
     {
@@ -19,5 +19,13 @@ public class Hand : MonoBehaviour
     {
         equipped = equipment;
         equipment.transform.SetParent(this.transform);
+    }
+
+    /// <summary>
+    /// Check if the hand is holding something
+    /// </summary>
+    public bool IsArmed()
+    {
+        return equipped != null;
     }
 }

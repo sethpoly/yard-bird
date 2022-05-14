@@ -22,7 +22,9 @@ public class EquipmentDetection : MonoBehaviour
 
     private void Update() 
     {
-        MonitorRadius();
+        // Only monitor radius if hand is unarmed
+        if(!hand.IsArmed())
+            MonitorRadius();
     }
 
     private void MonitorRadius()
@@ -57,10 +59,8 @@ public class EquipmentDetection : MonoBehaviour
         Equipment equipment = hit.collider.gameObject.GetComponent<Equipment>();
         if(equipment != null) 
         {
-            Debug.Log("Trying to process equipment found...");
-            equipment.AttachEquipment(player, hand.transform);
-            hand.Equip(equipment);
-            equipment.Setup();
+            Debug.Log("Processed equipment found -> " + hit.collider.name);
+            equipment.AttachEquipment(player, hand);
         }   
     }
 

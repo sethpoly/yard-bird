@@ -13,10 +13,12 @@ public abstract class Equipment: MonoBehaviour {
         Debug.Log("Alt use not implemented");
     }
 
-    public void AttachEquipment(Player player, Transform hand)
+    public void AttachEquipment(Player player, Hand hand)
     {
         this.player = player;
-        this.hand = hand;
+        this.hand = hand.transform;
+        hand.Equip(this);
+        this.Setup();
     }
 }
 
