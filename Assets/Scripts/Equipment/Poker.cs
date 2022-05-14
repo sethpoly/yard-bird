@@ -3,9 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Equipment: MonoBehaviour {
+
+    [SerializeField] public Player player;
+    [SerializeField] public Transform hand;
+
+    public abstract void Setup();
     public abstract void CheckMainUse();
     public virtual void CheckAltUse(){
         Debug.Log("Alt use not implemented");
+    }
+
+    public void AttachEquipment(Player player, Hand hand)
+    {
+        this.player = player;
+        this.hand = hand.transform;
+        hand.Equip(this);
+        this.Setup();
     }
 }
 
@@ -17,10 +30,8 @@ public class Poker : Equipment
         POKE,
         RESET
     }
-    [SerializeField] private Player player;
     [SerializeField] private KeyCode pokeKey;
     [SerializeField] private KeyCode altKey = KeyCode.E;
-    [SerializeField] private Transform hand;
     [SerializeField] private Transform pokerTip;
     [SerializeField] private float dragSpeed = 1f;
     [SerializeField] private float maxPokePhysicalDistance = .8f;
@@ -33,8 +44,25 @@ public class Poker : Equipment
     private PokeState pokeState = PokeState.NONE;
     private Vector3 startHandPosition;
 
+    override public void Setup()
+    {
+        if(hand != null)
+        {
+            // Orient poker
+            this.transform.localPosition = new Vector3(-0.04f, 0.09f, -0.75f);
+            this.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+            this.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+
+            // Save start orientation
+            startHandPosition = hand.localPosition;
+        }
+    }
+
     private void Start() {
-        startHandPosition = hand.localPosition;
+        if(hand != null)
+        {
+            startHandPosition = hand.localPosition;
+        }
     }
 
     override public void CheckMainUse()
@@ -154,6 +182,5 @@ public class Poker : Equipment
     private void RemovePokedItem(GameObject item)
     {
         pokedItems.Remove(item);
-        //Destroy(item);
     }
 }

@@ -4,11 +4,28 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-    public Equipment equipped;
+    public Equipment equipped = null;
 
     public void UpdateEquipmentLogic() 
     {
-        equipped.CheckMainUse();
-        equipped.CheckAltUse();
+        if(equipped != null)
+        {
+            equipped.CheckMainUse();
+            equipped.CheckAltUse();
+        }
+    }
+
+    public void Equip(Equipment equipment)
+    {
+        equipped = equipment;
+        equipment.transform.SetParent(this.transform);
+    }
+
+    /// <summary>
+    /// Check if the hand is holding something
+    /// </summary>
+    public bool IsArmed()
+    {
+        return equipped != null;
     }
 }
