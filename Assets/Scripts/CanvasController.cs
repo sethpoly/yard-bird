@@ -21,7 +21,6 @@ public sealed class CanvasController : MonoBehaviour
 
     public void ShowPromptText(string text)
     {
-        po.Setup();
         po.SetText(text);
         po.On();
     }

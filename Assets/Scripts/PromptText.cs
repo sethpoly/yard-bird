@@ -14,11 +14,6 @@ public class PromptText : MonoBehaviour
         textMesh.enabled = false;
     }
 
-    public void Setup()
-    {
-        transform.localPosition = Vector3.zero;
-    }
-
     public void On()
     {
         textMesh.enabled = true;
