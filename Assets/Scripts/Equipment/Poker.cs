@@ -6,6 +6,7 @@ public abstract class Equipment: MonoBehaviour {
 
     [SerializeField] public Player player;
     [SerializeField] public Transform hand;
+    public bool equipped = false;
 
     public abstract void Setup();
     public abstract void CheckMainUse();
@@ -19,6 +20,7 @@ public abstract class Equipment: MonoBehaviour {
         this.hand = hand.transform;
         hand.Equip(this);
         this.Setup();
+        equipped = true;
     }
 }
 
