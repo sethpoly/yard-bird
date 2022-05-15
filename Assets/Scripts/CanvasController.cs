@@ -19,16 +19,14 @@ public sealed class CanvasController : MonoBehaviour
         
     }
 
-    public void ShowPromptText(string text)
+    public void ShowPromptText(KeyCode keyCode, string text)
     {
-        po.SetText(text);
+        po.SetText(keyCode, text);
         po.On();
     }
 
     public void HidePromptText()
     {
-        string defaultText = "";
-        po.SetText(defaultText);
         po.Off();
     }
 }
