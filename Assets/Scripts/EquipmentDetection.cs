@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class EquipmentDetection : MonoBehaviour
 {
+    [SerializeField] private CanvasController canvasController;
     [SerializeField] private Player player;
     private Hand hand;
     [SerializeField] private KeyCode equipKey = KeyCode.E;
@@ -36,6 +37,13 @@ public class EquipmentDetection : MonoBehaviour
             // Check Input
             if(Input.GetKeyDown(equipKey))
                 ProcessSphereCast(hit.Value);
+
+            // Show prompt text
+            if(!IsAlreadyEquipped(hit.Value.collider.gameObject)) 
+                ShowPromptText();
+        } else 
+        {
+            HidePromptText();
         }
     }
 
@@ -61,7 +69,22 @@ public class EquipmentDetection : MonoBehaviour
         {
             Debug.Log("Processed equipment found -> " + hit.collider.name);
             equipment.AttachEquipment(player, hand);
+            HidePromptText();
         }   
     }
 
+    private bool IsAlreadyEquipped(GameObject equipment)
+    {
+        return equipment.GetComponent<Equipment>().equipped;
+    }
+
+    private void ShowPromptText()
+    {
+        canvasController.ShowPromptText("Press " + ((char)equipKey) + " to pick up");
+    }
+
+    private void HidePromptText()
+    {
+        canvasController.HidePromptText();
+    }
 }
