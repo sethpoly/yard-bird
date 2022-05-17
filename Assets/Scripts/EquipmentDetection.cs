@@ -80,11 +80,11 @@ public class EquipmentDetection : MonoBehaviour
 
     private void ShowPromptText()
     {
-        canvasController.ShowPromptText(equipKey, "Pick up <b>Skewer</b>");
+        canvasController.ShowEquipmentPromptText(equipKey, "Pick up <b>Skewer</b>");
     }
 
     private void HidePromptText()
     {
-        canvasController.HidePromptText();
+        canvasController.HideEquipmentPromptText();
     }
 }

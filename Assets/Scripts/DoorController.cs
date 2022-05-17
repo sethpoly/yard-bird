@@ -11,25 +11,43 @@ public class DoorController : MonoBehaviour, IInteractable
 
     [SerializeField] private Animator animator = null;
     private DoorState doorState = DoorState.CLOSED;
+    private string currentPrompt = null;
+    [SerializeField] private string openPrompt = "Open door";
+    [SerializeField] private string closePrompt = "Close door";
+
+    private void Start() {
+        currentPrompt = openPrompt;
+    }
+
+    void Update()
+    {
+        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+    }
 
     public bool Interaction(GameObject interacter)
     {
-        switch(doorState)
+        if(!animator.IsInTransition(0)) 
         {
-            case DoorState.OPEN:
-                animator.Play("DoorClose");
-                doorState = DoorState.CLOSED;
-                break;
-            case DoorState.CLOSED:
-                animator.Play("DoorOpen");
-                doorState = DoorState.OPEN;
-                break;
+            switch(doorState)
+            {
+                case DoorState.OPEN:
+                    animator.Play("DoorClose");
+                    doorState = DoorState.CLOSED;
+                    currentPrompt = openPrompt;
+                    break;
+                case DoorState.CLOSED:
+                    animator.Play("DoorOpen");
+                    doorState = DoorState.OPEN;
+                    currentPrompt = closePrompt;
+                    break;
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public string GetInteractionPrompt()
     {
-        return "Open door";
+        return currentPrompt;
     }
 }

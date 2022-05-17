@@ -46,8 +46,14 @@ public class Hand : MonoBehaviour
         {
             if(Input.GetKeyDown(interactKey))
                 ProcessInteraction(hit.Value);
+
+            IInteractable interactable = hit.Value.collider.gameObject.GetComponent<IInteractable>();
+            if(interactable != null) 
+            {
+                canvasController.ShowInteractPromptText(interactKey, interactable.GetInteractionPrompt());
+            }
         } else {
-            canvasController.HidePromptText();
+            canvasController.HideInteractPromptText();
         }
     }
 
