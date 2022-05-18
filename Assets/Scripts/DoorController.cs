@@ -10,23 +10,28 @@ public class DoorController : MonoBehaviour, IInteractable
     }
 
     [SerializeField] private Animator animator = null;
-    private DoorState doorState = DoorState.CLOSED;
-    private string currentPrompt = null;
     [SerializeField] private string openPrompt = "Open door";
     [SerializeField] private string closePrompt = "Close door";
+    private DoorState doorState = DoorState.CLOSED;
+    private string currentPrompt = null;
+    private BoxCollider boxCollider;
 
     private void Start() {
         currentPrompt = openPrompt;
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     void Update()
     {
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if(IsAnimating())
+            DisableColliders();
+         else 
+            EnableColliders();
     }
 
     public bool Interaction(GameObject interacter)
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) 
+        if(!IsAnimating()) 
         {
             switch(doorState)
             {
@@ -49,5 +54,20 @@ public class DoorController : MonoBehaviour, IInteractable
     public string GetInteractionPrompt()
     {
         return currentPrompt;
+    }
+
+    private bool IsAnimating()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1;
+    }
+
+    private void EnableColliders()
+    {
+        boxCollider.enabled = true;
+    }
+
+    private void DisableColliders()
+    {
+        boxCollider.enabled = false;
     }
 }
