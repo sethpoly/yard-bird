@@ -18,4 +18,9 @@ public class Containerable : MonoBehaviour, IInteractable
 
         return true;
     }
+
+    public string GetInteractionPrompt()
+    {
+        return "";
+    }
 }

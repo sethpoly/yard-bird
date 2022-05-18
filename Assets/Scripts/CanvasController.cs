@@ -4,29 +4,38 @@ using UnityEngine;
 
 public sealed class CanvasController : MonoBehaviour
 {
-    [SerializeField] private GameObject promptText;
-    private PromptText po;
+    [SerializeField] private GameObject equipmentText;
+    [SerializeField] private GameObject interactText;
+    private PromptText equipmentPrompt;
+    private PromptText interactPrompt;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        po = promptText.GetComponent<PromptText>();
+        equipmentPrompt = equipmentText.GetComponent<PromptText>();
+        interactPrompt = interactText.GetComponent<PromptText>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowEquipmentPromptText(KeyCode keyCode, string text)
     {
-        
+        equipmentPrompt.SetText(keyCode, text);
+        equipmentPrompt.On();
     }
 
-    public void ShowPromptText(KeyCode keyCode, string text)
+    public void HideEquipmentPromptText()
     {
-        po.SetText(keyCode, text);
-        po.On();
+        equipmentPrompt.Off();
     }
 
-    public void HidePromptText()
+    public void ShowInteractPromptText(KeyCode keyCode, string text)
     {
-        po.Off();
+        interactPrompt.SetText(keyCode, text);
+        interactPrompt.On();
+    }
+
+    public void HideInteractPromptText()
+    {
+        interactPrompt.Off();
     }
 }

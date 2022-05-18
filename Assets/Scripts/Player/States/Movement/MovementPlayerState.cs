@@ -20,6 +20,7 @@ public class MovementPlayerState : PlayerFSMState
         _player.playerMovement.UpdateMovement();
         _player.playerMovement.UpdateMouseLook();
         _player.hand.UpdateEquipmentLogic();
+        _player.hand.CheckInteractableObjects();
     }
 
     public override void FixedUpdate()

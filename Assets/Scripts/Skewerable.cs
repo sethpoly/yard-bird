@@ -56,6 +56,11 @@ public class Skewerable : MonoBehaviour, IInteractable
         rb.isKinematic = false;
         stuckTo = null;
     }
+
+    public string GetInteractionPrompt()
+    {
+        return "";
+    }
 }
 
 

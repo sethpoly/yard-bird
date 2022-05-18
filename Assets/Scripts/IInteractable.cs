@@ -12,4 +12,6 @@ public interface IInteractable
     /// A bool representing whether the interaction was successful
     /// </returns>
     public bool Interaction(GameObject interacter);
+
+    public string GetInteractionPrompt();
 }
