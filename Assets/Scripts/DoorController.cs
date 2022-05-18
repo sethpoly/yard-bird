@@ -26,7 +26,7 @@ public class DoorController : MonoBehaviour, IInteractable
 
     public bool Interaction(GameObject interacter)
     {
-        if(!animator.IsInTransition(0)) 
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) 
         {
             switch(doorState)
             {
