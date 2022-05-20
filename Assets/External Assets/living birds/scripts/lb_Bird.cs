@@ -358,7 +358,7 @@ public class lb_Bird : MonoBehaviour {
 	void OnGroundBehaviors(){
 		idle = anim.GetCurrentAnimatorStateInfo(0).fullPathHash == idleAnimationHash;
 		if(!GetComponent<Rigidbody>().isKinematic){
-			GetComponent<Rigidbody>().isKinematic = true;
+			//GetComponent<Rigidbody>().isKinematic = true;
 		}
 		if(idle){
 			//the bird is in the idle animation, lets randomly choose a behavior every 3 seconds
@@ -368,20 +368,10 @@ public class lb_Bird : MonoBehaviour {
 				float rand = Random.value;
 				if (rand < .3){
 					DisplayBehavior(birdBehaviors.sing);
-				}else if (rand < .5){
-					DisplayBehavior(birdBehaviors.peck);
 				}else if (rand < .6){
 					DisplayBehavior(birdBehaviors.preen);	
 				}else if (!perched && rand<.7){
 					DisplayBehavior(birdBehaviors.ruffle);	
-				}else if (!perched && rand <.85){
-					DisplayBehavior(birdBehaviors.hopForward);	
-				}else if (!perched && rand < .9){
-					DisplayBehavior(birdBehaviors.hopLeft);	
-				}else if (!perched && rand <.95){
-					DisplayBehavior(birdBehaviors.hopRight);
-				}else if (!perched && rand <= 1){
-					DisplayBehavior(birdBehaviors.hopBackward);	
 				}else{
 					DisplayBehavior(birdBehaviors.sing);	
 				}
@@ -410,17 +400,11 @@ public class lb_Bird : MonoBehaviour {
 		case birdBehaviors.peck:
 			anim.SetTrigger(peckBoolHash);			
 			break;
-		case birdBehaviors.hopForward:
-			anim.SetInteger (hopIntHash, 1);			
-			break;
 		case birdBehaviors.hopLeft:
 			anim.SetInteger (hopIntHash, -2);			
 			break;
 		case birdBehaviors.hopRight:
 			anim.SetInteger (hopIntHash, 2);
-			break;
-		case birdBehaviors.hopBackward:
-			anim.SetInteger (hopIntHash, -1);			
 			break;
 		}
 	}
