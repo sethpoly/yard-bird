@@ -22693,6 +22693,18 @@ PrefabInstance:
       propertyPath: objectLayer.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 2309232306275865178, guid: b0b19cdc788fec24db3159c96c59076d, type: 3}
+      propertyPath: ignoreLayer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309232306275865178, guid: b0b19cdc788fec24db3159c96c59076d, type: 3}
+      propertyPath: ignoreLayer.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309232306275865178, guid: b0b19cdc788fec24db3159c96c59076d, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2309232307162815876, guid: b0b19cdc788fec24db3159c96c59076d, type: 3}
       propertyPath: player
       value: 
@@ -22791,7 +22803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8140311258709656693, guid: b0b19cdc788fec24db3159c96c59076d, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 3327
+      value: 7423
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b19cdc788fec24db3159c96c59076d, type: 3}
@@ -25814,7 +25826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a664af31f52384999da00339c4a534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallForce: 200
+  fallForce: 100
 --- !u!1001 &2972667197229715953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26170,11 +26182,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 719272560292648949, guid: a427329c58da9d740bbfe83d47c4a7a3, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2873892333558253982, guid: a427329c58da9d740bbfe83d47c4a7a3, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8451072818996062193, guid: a427329c58da9d740bbfe83d47c4a7a3, type: 3}
       propertyPath: m_RootOrder
@@ -26238,7 +26250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9080362238497815883, guid: a427329c58da9d740bbfe83d47c4a7a3, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9080362238497815884, guid: a427329c58da9d740bbfe83d47c4a7a3, type: 3}
       propertyPath: m_Enabled
