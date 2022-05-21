@@ -20,8 +20,6 @@ public class BirdCage : MonoBehaviour
 
         // Get animator in child
         animator = GetComponentInChildren<Animator>();
-
-        StartCageEvent(CageEvent.fall);
     }
 
     void StartCageEvent(CageEvent cageEvent)
