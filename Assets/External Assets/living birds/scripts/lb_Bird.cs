@@ -100,6 +100,8 @@ public class lb_Bird : MonoBehaviour {
 		}
 	}
 
+	
+
 	void PauseBird(){
 		if(!dead){
 			originalAnimSpeed = anim.speed;
@@ -457,6 +459,12 @@ public class lb_Bird : MonoBehaviour {
 		if (fleeCrows && !dead){
 			Flee ();
 		}
+	}
+
+	// Suicide
+	public void Suicide() {
+		Debug.Log("Bird is attempting suicide");
+		Destroy(transform.gameObject);
 	}
 
 	public void KillBird(){
