@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 20f;
     [SerializeField] private float slopeForce = 3f;
     [SerializeField] private float slopeRayLength = 1.5f;
+    [SerializeField] private int ignoreLayer;
 
     [Header("Jump Settings")]
     [SerializeField] private float gravity = -13.0f;
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller = null;
 
     
+    
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -44,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        Physics.IgnoreLayerCollision(gameObject.layer, ignoreLayer);
     }
 
     // Update is called once per frame
